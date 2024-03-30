@@ -1,12 +1,12 @@
 'use client';
 
-import InvoiceDocument from "@/components/screendoor/InvoicePDF";
+import EstimatesDocument from "@/components/screendoor/EstimatesPDF";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 
 export default function Home() {
   return ( 
-      <PDFDownloadLink  document={<InvoiceDocument />} fileName="Invoice.pdf">
-        Download now
+      <PDFDownloadLink  document={<EstimatesDocument />} fileName="Estimates.pdf">
+        Download pdf
       </PDFDownloadLink>
     );
 }

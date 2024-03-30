@@ -1,22 +1,11 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import React from 'react';
 import { Page, Document, StyleSheet, Font } from '@react-pdf/renderer';
 
 import Head from './components/Head';
 import EstimatesDescription from './components/EstimatesDescription';
-import EstimatesDetail from './components/EstimatesDetail';
-
-
-
-const PDFViewer = dynamic(
-  () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
-  {
-    ssr: false,
-    loading: () => <p>Loading...</p>,
-  },
-);
+import EstimatesTable from './components/EstimatesTable';
 
 Font.register({
   family: "Noto Sans JP",
@@ -35,16 +24,16 @@ const styles = StyleSheet.create({
   }
 })
 
-const InvoiceDocument = () => {
+const EstimatesDocument = () => {
   return (
     <Document>
       <Page size="A3" style={styles.page}>
         <Head />
         <EstimatesDescription />
-        <EstimatesDetail />
+        <EstimatesTable />
       </Page>
     </Document>
   )
 }
 
-export default InvoiceDocument
+export default EstimatesDocument
