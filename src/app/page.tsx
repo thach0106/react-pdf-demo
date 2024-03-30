@@ -1,12 +1,24 @@
 'use client';
 
 import EstimatesDocument from "@/components/screendoor/EstimatesPDF";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import { usePDF } from "@react-pdf/renderer";
+import { useRef } from "react";
 
 export default function Home() {
-  return ( 
-      <PDFDownloadLink  document={<EstimatesDocument />} fileName="Estimates.pdf">
-        Download pdf
-      </PDFDownloadLink>
-    );
+  const [instanceDoc, updateDoc] = usePDF({ document: <EstimatesDocument /> });
+  const pdfDownloadRef = useRef(null);
+
+  const handleExportPdf = () => {
+    updateDoc(<EstimatesDocument />);
+    (pdfDownloadRef.current as unknown as HTMLAnchorElement).click()
+  };
+  return (
+    <>
+      <button onClick={handleExportPdf} 
+        style={{padding: 8, color: 'blueviolet', fontSize: 13, fontWeight: 'bold', outline: 'auto', }} >
+        Download estimates pdf
+      </button>
+      <a ref={pdfDownloadRef} href={instanceDoc.url as string} download="Estimates.pdf" />
+    </>
+  );
 }
